@@ -12,6 +12,9 @@ import RctThemeProvider from "./RctThemeProvider";
 // Main App
 import RctDefaultLayout from "./DefaultLayout";
 
+// App Sign In
+import AppSignIn from "./SigninFirebase";
+
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
@@ -49,6 +52,7 @@ class App extends Component {
                     authUser={ user }
                     component={ RctDefaultLayout }
                 />
+                <Route path="/signin" component={ AppSignIn } />
             </RctThemeProvider>
         );
     };
