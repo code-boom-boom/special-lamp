@@ -1,0 +1,18 @@
+/**
+ * All the possible actions types for redux store
+ */
+
+// Auth Actions
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const SIGNUP_USER = 'SIGNUP_USER';
+export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
+export const SIGNUP_USER_FAILURE = 'SIGNUP_USER_FAILURE';
+export const LOGIN_FACEBOOK_USER = 'LOGIN_FACEBOOK_USER';
+export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER';
+export const LOGIN_TWITTER_USER = 'LOGIN_TWITTER_USER';
+export const LOGIN_GITHUB_USER = 'LOGIN_GITHUB_USER';
+export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
+export const LOGOUT_USER_FAILURE = 'LOGOUT_USER_FAILURE';
