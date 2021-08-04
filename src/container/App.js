@@ -1,7 +1,33 @@
+/**
+ * App.js Layout starts here
+ */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
+import { NotificationContainer } from 'react-notifications';
+
+// rct theme provider
 import RctThemeProvider from "./RctThemeProvider";
+
+// Main App
+import RctDefaultLayout from "./DefaultLayout";
+
+/**
+ * Initial Path To Check Whether User Is Logged In Or Not
+ */
+const InitialPath = ({ component: Component, authUser, ...rest}) =>
+    <Route
+        {...rest}
+        render={props =>
+            authUser
+                ? <Component {...props} />
+                : <Redirect
+                    to={{
+                        pathname: "/signin",
+                        state: { from: props.location }
+                    }}
+                />}
+    />;
 
 class App extends Component {
     render () {
@@ -9,14 +35,21 @@ class App extends Component {
 
         if (location.pathname === "/") {
             if (user === null) {
-                return (<Redirect to={"/signin"} />);
+                return (<Redirect to={ "/signin" } />);
             } else {
-                return (<Redirect to={"/app/dashboard/ecommerce"} />);
+                return (<Redirect to={ "/app/dashboard/ecommerce" } />);
             }
         }
 
         return (
-            <RctThemeProvider></RctThemeProvider>
+            <RctThemeProvider>
+                <NotificationContainer />
+                <InitialPath
+                    path={ `${match.url}app` }
+                    authUser={ user }
+                    component={ RctDefaultLayout }
+                />
+            </RctThemeProvider>
         );
     };
 }
