@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {Redirect} from "react-router-dom";
+import RctThemeProvider from "./RctThemeProvider";
 
 class App extends Component {
     render () {
@@ -15,7 +16,7 @@ class App extends Component {
         }
 
         return (
-            <div>This is App component</div>
+            <RctThemeProvider></RctThemeProvider>
         );
     };
 }
