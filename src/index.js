@@ -1,10 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const rootEl = document.getElementById("root");
+
+let render = () => {
+    const MainApp = require("./App").default;
+
+    ReactDOM.render(
+        <MainApp />,
+        rootEl
+    );
+};
+
+if (module.hot) {
+    module.hot.accept("./App", () => {
+        const NextApp = require("./App").default;
+        render(
+            <NextApp />,
+            rootEl
+        );
+    })
+}
+
+render();

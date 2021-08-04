@@ -1,9 +1,9 @@
-function App() {
-  return (
-    <div className="App">
+import React from "react";
+
+const MainApp = () => (
+    <div>
       This is App
     </div>
-  );
-}
+);
 
-export default App;
+export default MainApp;
