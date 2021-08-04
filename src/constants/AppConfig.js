@@ -2,7 +2,7 @@
  * App Config File
  */
 const AppConfig = {
-    appLogo: require('../assets/img/site-logo.png'),               // App Logo
+    appLogo: require('Assets/img/site-logo.png'),               // App Logo
     brandName: 'Reactify',                                      // Brand Name
     navCollapsed: false,                                        // Sidebar collapse
     darkMode: false,                                            // Dark Mode
@@ -10,7 +10,7 @@ const AppConfig = {
     rtlLayout: false,                                           // RTL Layout
     miniSidebar: false,                                         // Mini Sidebar
     enableSidebarBackgroundImage: true,                         // Enable Sidebar Background Image
-    sidebarImage: require('../assets/img/sidebar-4.jpg'),          // Select sidebar image
+    sidebarImage: require('Assets/img/sidebar-4.jpg'),          // Select sidebar image
     isDarkSidenav: true,                                        // Set true to dark sidebar
     enableThemeOptions: true,                                   // Enable Theme Options
     locale: {

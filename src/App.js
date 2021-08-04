@@ -9,7 +9,7 @@ import MomentUtils from "@date-io/moment";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // CSS
-// import "./lib/reactifyCss";
+import "./lib/reactifyCss";
 
 // app component
 import App from "./container/App";

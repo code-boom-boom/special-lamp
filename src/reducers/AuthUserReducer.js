@@ -22,7 +22,7 @@ const INIT_STAT = {
 export default (state = INIT_STAT, action) => {
     switch (action.type) {
         case LOGIN_USER:
-            return { ...state };
+            return { ...state, loading: true };
         case LOGIN_USER_SUCCESS:
             return { ...state };
         case LOGIN_USER_FAILURE:
