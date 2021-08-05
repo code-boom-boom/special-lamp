@@ -1,3 +1,6 @@
+/**
+ * Sign Up With Firebase
+ */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import QueueAnim from "rc-queue-anim";
@@ -7,52 +10,36 @@ import { Link } from "react-router-dom";
 import AppConfig from "Constants/AppConfig";
 import { Form, FormGroup, Input } from "reactstrap";
 
-// redux action
-import {
-    signinUserInFirebase,
-    signinUserWithFacebook,
-    signinUserWithGoogle,
-    signinUserWithGithub,
-    signinUserWithTwitter
-} from "Actions";
 import { SessionSlider } from "Components/Widgets";
 
-// Auth File
-import Auth from "../Auth/Auth";
+// redux action
+import {
+    signinUserWithFacebook,
+    signinUserWithGithub,
+    signinUserWithGoogle,
+    signinUserWithTwitter,
+    signupUserInFirebase
+} from "Actions";
 
-const auth = new Auth();
-
-class Signin extends Component {
-
-    // User credentials
+class SignupFirebase extends Component {
     state = {
-        email: "demo@example.com",
-        password: "test#123"
-    }
+        name: "",
+        email: "",
+        password: "",
+    };
 
     /**
-     * On User Log In
+     * On User Signup
      */
-    onUserLogin() {
-        if (this.state.email !== "" && this.state.password !== "") {
-            this.props.signinUserInFirebase(this.state, this.props.history);
+    onUserSignUp() {
+        const { email, password } = this.state;
+        if (email !== "" & password !== "") {
+            this.props.signupUserInFirebase({ email, password }, this.props.history);
         }
     }
 
-    /**
-     * On User Sign UP
-     */
-    onUserSignUp() {
-        this.props.history.push("/signup");
-    }
-
-    //Auth0 Login
-    loginAuth0() {
-        auth.login();
-    }
-
     render() {
-        const { email, password } = this.state;
+        const { name, email, password } = this.state;
         const { loading } = this.props;
         return (
             <QueueAnim type="bottom" duration={ 2000 }>
@@ -66,12 +53,19 @@ class Signin extends Component {
                                 <div className="d-flex justify-content-between">
                                     <div className="session-logo">
                                         <Link to="/">
-                                            <img src={ AppConfig.appLogo } alt="session-logo" className="img-fluid" width="110" height="35" />
+                                            <img src={ AppConfig.appLogo } alt="session-logo" width="110" height="35" />
                                         </Link>
                                     </div>
                                     <div>
-                                        <a className="mr-15" onClick={ () => this.onUserSignUp() }>Create New Account?</a>
-                                        <Button variant="contained" className="btn-light" onClick={ () => this.onUserSignUp() }>Sign Up</Button>
+                                        <Link to="/signin" className="mr-15 text-white">Already have an account?</Link>
+                                        <Button
+                                            className="btn-light"
+                                            component={ Link }
+                                            to="/signin"
+                                            variant="contained"
+                                        >
+                                            Sign In
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
@@ -82,11 +76,22 @@ class Signin extends Component {
                             <div className="row row-eq-height">
                                 <div className="col-sm-7 col-md-7 col-lg-8">
                                     <div className="session-body text-center">
-                                        <div className="session-head mb-30">
-                                            <h2 className="font-weight-bold">Get started with { AppConfig.brandName }</h2>
-                                            <p className="mb-0">Most powerful ReactJS admin panel</p>
+                                        <div className="session-head mb-15">
+                                            <h2>Get started with { AppConfig.brandName }</h2>
                                         </div>
                                         <Form>
+                                            <FormGroup className="has-wrapper">
+                                                <Input
+                                                    type="text"
+                                                    value={ name }
+                                                    name="user-name"
+                                                    id="user-name"
+                                                    className="has-input input-lg"
+                                                    placeholder="Enter Your Name"
+                                                    onChange={ (e) => this.setState({ name: e.target.value }) }
+                                                />
+                                                <span className="has-icon"><i className="ti-user"></i></span>
+                                            </FormGroup>
                                             <FormGroup className="has-wrapper">
                                                 <Input
                                                     type="mail"
@@ -95,7 +100,7 @@ class Signin extends Component {
                                                     id="user-mail"
                                                     className="has-input input-lg"
                                                     placeholder="Enter Email Address"
-                                                    onChange={ (event) => this.setState({ email: event.target.value }) }
+                                                    onChange={ (e) => this.setState({ email: e.target.value }) }
                                                 />
                                                 <span className="has-icon"><i className="ti-email"></i></span>
                                             </FormGroup>
@@ -107,59 +112,47 @@ class Signin extends Component {
                                                     id="pwd"
                                                     className="has-input input-lg"
                                                     placeholder="Password"
-                                                    onChange={ (event) => this.setState({ password: event.target.value }) }
+                                                    onChange={ (e) => this.setState({ password: e.target.value }) }
                                                 />
                                                 <span className="has-icon"><i className="ti-lock"></i></span>
                                             </FormGroup>
                                             <FormGroup className="mb-15">
                                                 <Button
-                                                    color="primary"
-                                                    className="btn-block text-white w-100"
+                                                    className="btn-info text-white btn-block w-100"
                                                     variant="contained"
                                                     size="large"
-                                                    onClick={ () => this.onUserLogin() }
-                                                >
-                                                    Sign In
-                                                </Button>
-                                            </FormGroup>
-                                            <FormGroup className="mb-15">
-                                                <Button
-                                                    variant="contained"
-                                                    className="btn-info btn-block text-white w-100"
-                                                    size="large"
-                                                    onClick={ () => this.loginAuth0() }
-                                                >
-                                                    Sign In With Auth0
+                                                    onClick={ () => this.onUserSignUp() }>
+                                                    Sign Up
                                                 </Button>
                                             </FormGroup>
                                         </Form>
                                         <p className="mb-20">or sign in with</p>
-                                        <Fab variant="circular" size="small"
+                                        <Fab variant="round" size="small"
                                              className="btn-facebook mr-15 mb-20 text-white"
-                                             onClick={() => this.props.signinUserWithFacebook(this.props.history)}
+                                             onClick={ () => this.props.signinUserWithFacebook(this.props.history) }
                                         >
                                             <i className="zmdi zmdi-facebook"></i>
                                         </Fab>
-                                        <Fab variant="circular" size="small"
+                                        <Fab variant="round" size="small"
                                              className="btn-google mr-15 mb-20 text-white"
-                                             onClick={() => this.props.signinUserWithGoogle(this.props.history)}
+                                             onClick={ () => this.props.signinUserWithGoogle(this.props.history) }
                                         >
                                             <i className="zmdi zmdi-google"></i>
                                         </Fab>
-                                        <Fab variant="circular" size="small"
+                                        <Fab variant="round" size="small"
                                              className="btn-twitter mr-15 mb-20 text-white"
-                                             onClick={() => this.props.signinUserWithTwitter(this.props.history)}
+                                             onClick={ () => this.props.signinUserWithTwitter(this.props.history) }
                                         >
                                             <i className="zmdi zmdi-twitter"></i>
                                         </Fab>
-                                        <Fab variant="circular" size="small"
+                                        <Fab variant="round" size="small"
                                              className="btn-instagram mr-15 mb-20 text-white"
-                                             onClick={() => this.props.signinUserWithGithub(this.props.history)}
+                                             onClick={ () => this.props.signinUserWithGithub(this.props.history) }
                                         >
                                             <i className="zmdi zmdi-github-alt"></i>
                                         </Fab>
-                                        <p className="text-muted">By signing up you agree to {AppConfig.brandName}</p>
-                                        <p className="mb-0"><a target="_blank" href="#/terms-condition" className="text-muted">Terms of Service</a></p>
+                                        <p className="text-muted">By signing up you agree to { AppConfig.brandName }</p>
+                                        <p><Link to="/terms-condition" className="text-muted">Terms of Service</Link></p>
                                     </div>
                                 </div>
                                 <div className="col-sm-5 col-md-5 col-lg-4">
@@ -176,14 +169,14 @@ class Signin extends Component {
 
 // map state to props
 const mapStateToProps = ({ authUser }) => {
-    const { user, loading } = authUser;
-    return { user, loading };
-};
+    const { loading } = authUser;
+    return { loading };
+}
 
 export default connect(mapStateToProps, {
-    signinUserInFirebase,
+    signupUserInFirebase,
     signinUserWithFacebook,
     signinUserWithGoogle,
     signinUserWithGithub,
     signinUserWithTwitter
-})(Signin);
+})(SignupFirebase);
