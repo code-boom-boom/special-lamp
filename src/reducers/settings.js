@@ -1,5 +1,6 @@
 // app config
 import AppConfig from "../constants/AppConfig";
+import {COLLAPSED_SIDEBAR} from "Actions/types";
 
 /**
  * Initial app settings
@@ -154,6 +155,11 @@ const INIT_STATE = {
 
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
+
+        // collapse sidebar
+        case COLLAPSED_SIDEBAR:
+            return { ...state, navCollapsed: action.isCollapsed };
+
         default:
             return { ...state };
     }
