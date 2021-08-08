@@ -8,9 +8,11 @@ import Sidebar from "react-sidebar";
 import classnames from "classnames";
 
 // Components
+import Header from "Components/Header/Header";
 import SidebarContent from "Components/Sidebar";
 
 // preload components
+import PreloadHeader from "Components/PreloadLayout/PreloadHeader";
 import PreloadSidebar from "Components/PreloadLayout/PreloadSidebar";
 
 // app config
@@ -61,6 +63,15 @@ class MainApp extends Component {
         }
     }
 
+    // render header
+    renderHeader() {
+        const { loadingHeader } = this.state;
+        if (loadingHeader) {
+            return <PreloadHeader />;
+        }
+        return <Header />;
+    }
+
     // render sidebar
     renderSidebar() {
         const { loadingSidebar } = this.state;
@@ -88,6 +99,7 @@ class MainApp extends Component {
                         <div className="app-container">
                             <div className="rct-app-content">
                                 <div className="app-header">
+                                    { this.renderHeader() }
                                 </div>
                                 <div className="rct-page">
                                 </div>

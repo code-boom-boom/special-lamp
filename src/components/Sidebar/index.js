@@ -12,6 +12,8 @@ import { collapsedSidebarAction } from "Actions";
 
 // Components
 import UserBlock from "./UserBlock";
+import AgencySidebar from "Components/AgencyMenu/AgencySidebar";
+import SidebarContent from "Components/Sidebar/SidebarContent";
 
 class Sidebar extends Component {
 
@@ -75,6 +77,11 @@ class Sidebar extends Component {
                                 style={{ height: "calc(100vh - 60px)" }}
                             >
                                 <UserBlock />
+                                { !agencySidebar ?
+                                    <SidebarContent />
+                                    :
+                                    <AgencySidebar />
+                                }
                             </Scrollbars>
                         </div>
                     </div>
