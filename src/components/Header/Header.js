@@ -15,6 +15,7 @@ import { getAppLayout } from "Helpers/helpers";
 
 // components
 import LanguageProvider from "./LanguageProvider";
+import Notifications from "./Notifications";
 
 // intl messages
 import IntlMessages from "Util/IntlMessages";
@@ -115,6 +116,7 @@ class Header extends Component {
                             </li>
                         }
                         <LanguageProvider />
+                        <Notifications />
                     </ul>
                 </Toolbar>
             </AppBar>

@@ -3,7 +3,7 @@
  */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Dropdown, DropdownMenu, DropdownToggle} from "reactstrap";
+import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import { Scrollbars } from "react-custom-scrollbars";
 
 // actions
