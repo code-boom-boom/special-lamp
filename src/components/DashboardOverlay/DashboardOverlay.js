@@ -5,7 +5,9 @@ import React, { Component } from "react";
 
 // intl messages
 import IntlMessages from "Util/IntlMessages";
-import {overlay} from "react-bootstrap-sweetalert/dist/styles/SweetAlertStyles";
+
+// components
+import OrdersStats from "Components/DashboardOverlay/Orders";
 
 class DashboardOverlay extends Component {
 
@@ -30,7 +32,7 @@ class DashboardOverlay extends Component {
                 <div className="dashboard-overlay-content mb-30">
                     <div className="row row-eq-height">
                         <div className="col-sm-6 col-md-4">
-
+                            <OrdersStats />
                         </div>
                         <div className="col-sm-6 col-md-4">
 
