@@ -19,6 +19,7 @@ import LanguageProvider from "./LanguageProvider";
 import Notifications from "./Notifications";
 import Cart from "./Cart";
 import ChatSidebar from "./ChatSidebar";
+import DashboardOverlay from "Components/DashboardOverlay/DashboardOverlay";
 
 // intl messages
 import IntlMessages from "Util/IntlMessages";
@@ -149,6 +150,9 @@ class Header extends Component {
                         <ChatSidebar />
                     </Drawer>
                 </Toolbar>
+                <DashboardOverlay
+                    onClose={ () => this.closeDashboardOverlay() }
+                />
             </AppBar>
         );
     }
