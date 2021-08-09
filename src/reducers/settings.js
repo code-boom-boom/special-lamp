@@ -1,9 +1,30 @@
+/**
+ * App Settings Reducers
+ */
+import update from 'react-addons-update';
+
+import {
+    COLLAPSED_SIDEBAR,
+    DARK_MODE,
+    BOXED_LAYOUT,
+    RTL_LAYOUT,
+    MINI_SIDEBAR,
+    SEARCH_FORM_ENABLE,
+    CHANGE_THEME_COLOR,
+    TOGGLE_SIDEBAR_IMAGE,
+    SET_SIDEBAR_IMAGE,
+    SET_LANGUAGE,
+    START_USER_TOUR,
+    STOP_USER_TOUR,
+    TOGGLE_DARK_SIDENAV,
+    CHANGE_AGENCY_LAYOUT_BG
+} from 'Actions/types';
+
 // app config
-import AppConfig from "../constants/AppConfig";
-import {COLLAPSED_SIDEBAR} from "Actions/types";
+import AppConfig from 'Constants/AppConfig';
 
 /**
- * Initial app settings
+ * initial app settings
  */
 const INIT_STATE = {
     navCollapsed: AppConfig.navCollapsed,
@@ -46,10 +67,10 @@ const INIT_STATE = {
     },
     // sidebar background image
     sidebarBackgroundImages: [
-        require('../assets/img/sidebar-1.jpg'),
-        require('../assets/img/sidebar-2.jpg'),
-        require('../assets/img/sidebar-3.jpg'),
-        require('../assets/img/sidebar-4.jpg'),
+        require('Assets/img/sidebar-1.jpg'),
+        require('Assets/img/sidebar-2.jpg'),
+        require('Assets/img/sidebar-3.jpg'),
+        require('Assets/img/sidebar-4.jpg'),
     ],
     enableSidebarBackgroundImage: AppConfig.enableSidebarBackgroundImage, // default enable sidebar background
     selectedSidebarImage: AppConfig.sidebarImage, // default sidebar background image
@@ -160,7 +181,71 @@ export default (state = INIT_STATE, action) => {
         case COLLAPSED_SIDEBAR:
             return { ...state, navCollapsed: action.isCollapsed };
 
-        default:
-            return { ...state };
+        // start user tour
+        case START_USER_TOUR:
+            return { ...state, startUserTour: true };
+
+        // stop user tour
+        case STOP_USER_TOUR:
+            return { ...state, startUserTour: false };
+
+        // change theme color
+        case CHANGE_THEME_COLOR:
+            return { ...state, activeTheme: action.payload };
+
+        // dark mode
+        case DARK_MODE:
+            return { ...state, darkMode: action.payload };
+
+        // boxed layout
+        case BOXED_LAYOUT:
+            return { ...state, boxLayout: action.payload };
+
+        // rtl layout
+        case RTL_LAYOUT:
+            return { ...state, rtlLayout: action.payload };
+
+        // mini sidebar
+        case MINI_SIDEBAR:
+            return { ...state, miniSidebar: action.payload };
+
+        // search form
+        case SEARCH_FORM_ENABLE:
+            document.body.classList.toggle('search-active', !state.searchFormOpen);
+            return { ...state, searchFormOpen: !state.searchFormOpen };
+
+        // togglw sidebar image
+        case TOGGLE_SIDEBAR_IMAGE:
+            return { ...state, enableSidebarBackgroundImage: !state.enableSidebarBackgroundImage };
+
+        // set sidebar image
+        case SET_SIDEBAR_IMAGE:
+            return { ...state, selectedSidebarImage: action.payload };
+
+        // set language
+        case SET_LANGUAGE:
+            return { ...state, locale: action.payload };
+
+        // dark sidenav
+        case TOGGLE_DARK_SIDENAV:
+            return { ...state, isDarkSidenav: !state.isDarkSidenav };
+
+        // agency layout bg handler
+        case CHANGE_AGENCY_LAYOUT_BG:
+            let layoutsBg = [];
+            for (const layoutBg of state.agencyLayoutBgColors) {
+                if (layoutBg.id === action.payload.id) {
+                    layoutBg.active = true
+                } else {
+                    layoutBg.active = false
+                }
+                layoutsBg.push(layoutBg);
+            }
+            return {
+                ...state,
+                agencyLayoutBgColors: layoutsBg
+            }
+
+        default: return { ...state };
     }
 }
