@@ -26,7 +26,6 @@ class Notifications extends Component {
     getNotifications() {
         api.get("notifications.js")
             .then((response) => {
-                console.log(response);
                 this.setState({ notifications: response.data });
             })
             .catch(error => {

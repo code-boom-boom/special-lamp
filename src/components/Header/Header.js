@@ -4,8 +4,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import {AppBar, Button, IconButton, Toolbar, Tooltip} from "@material-ui/core";
+import {AppBar, Button, Drawer, IconButton, Toolbar, Tooltip} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import screenfull from "screenfull";
 
 // Redux actions
 import { collapsedSidebarAction } from "Actions";
@@ -16,6 +17,8 @@ import { getAppLayout } from "Helpers/helpers";
 // components
 import LanguageProvider from "./LanguageProvider";
 import Notifications from "./Notifications";
+import Cart from "./Cart";
+import ChatSidebar from "./ChatSidebar";
 
 // intl messages
 import IntlMessages from "Util/IntlMessages";
@@ -52,6 +55,11 @@ class Header extends Component {
         e.classList.remove("show");
         e.classList.add("d-none");
         document.body.style.overflow = "";
+    }
+
+    // toggle screen full
+    toggleScreenFull() {
+        screenfull.toggle();
     }
 
     // mobile search form
@@ -117,7 +125,29 @@ class Header extends Component {
                         }
                         <LanguageProvider />
                         <Notifications />
+                        <Cart />
+                        <li className="list-inline-item setting-icon">
+                            <Tooltip title="Chat" placement="bottom">
+                                <IconButton aria-label="settings" onClick={ () => this.setState({ customizer: true }) }>
+                                    <i className="zmdi zmdi-comment"></i>
+                                </IconButton>
+                            </Tooltip>
+                        </li>
+                        <li className="list-inline-item">
+                            <Tooltip title="Full Screen" placement="bottom">
+                                <IconButton aria-label="settings" onClick={() => this.toggleScreenFull()}>
+                                    <i className="zmdi zmdi-crop-free"></i>
+                                </IconButton>
+                            </Tooltip>
+                        </li>
                     </ul>
+                    <Drawer
+                        anchor={ "right" }
+                        open={ this.state.customizer }
+                        onClose={ () => this.setState({ customizer: false }) }
+                    >
+                        <ChatSidebar />
+                    </Drawer>
                 </Toolbar>
             </AppBar>
         );
