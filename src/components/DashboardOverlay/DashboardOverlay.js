@@ -7,7 +7,9 @@ import React, { Component } from "react";
 import IntlMessages from "Util/IntlMessages";
 
 // components
-import OrdersStats from "Components/DashboardOverlay/Orders";
+import OrdersStats from "./Orders";
+import UsersStats from "./Users";
+import RatingsStats from "./Ratings";
 
 class DashboardOverlay extends Component {
 
@@ -35,10 +37,10 @@ class DashboardOverlay extends Component {
                             <OrdersStats />
                         </div>
                         <div className="col-sm-6 col-md-4">
-
+                            <UsersStats />
                         </div>
                         <div className="col-sm-6 col-md-4">
-
+                            <RatingsStats />
                         </div>
                     </div>
                 </div>
