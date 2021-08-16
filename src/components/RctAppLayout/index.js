@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Sidebar from "react-sidebar";
+import { Scrollbars } from "react-custom-scrollbars";
 import classnames from "classnames";
 
 // Components
@@ -63,6 +64,30 @@ class MainApp extends Component {
         }
     }
 
+    renderPage() {
+        const { pathname } = this.props.location;
+        const { children } = this.props;
+        if (pathname === "/app/chat" || pathname.startsWith("/app/mail") || pathname === "/app/todo") {
+            return (
+                <div className="rct-page-content p-0">
+                    {children}
+                </div>
+            );
+        }
+        return (
+            <Scrollbars
+                className="rct-scroll"
+                autoHide
+                autoHideDuration={ 100 }
+                style={ this.getScrollBarStyle() }
+            >
+                <div className="rct-page-content">
+                    { children }
+                </div>
+            </Scrollbars>
+        );
+    }
+
     // render header
     renderHeader() {
         const { loadingHeader } = this.state;
@@ -79,6 +104,13 @@ class MainApp extends Component {
             return <PreloadSidebar />;
         }
         return <SidebarContent />;
+    }
+
+    // scrollbar height
+    getScrollBarStyle() {
+        return {
+            height: "calc(100vh - 50px)"
+        }
     }
 
     render() {
@@ -102,6 +134,7 @@ class MainApp extends Component {
                                     { this.renderHeader() }
                                 </div>
                                 <div className="rct-page">
+                                    { this.renderPage() }
                                 </div>
                             </div>
                         </div>
