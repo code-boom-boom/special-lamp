@@ -13,6 +13,7 @@ import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
 import {
     VisitorAreaChartWidget,
     OrdersAreaChartWidget,
+    SalesAreaChartWidget
 } from "Components/Widgets";
 
 // widgets data
@@ -42,6 +43,10 @@ export default class EcommerceDashboard extends Component {
 
                     <div className="col-sm-6 col-md-4 w-xs-half-block">
                         <OrdersAreaChartWidget data={ ordersData } />
+                    </div>
+
+                    <div className="col-sm-6 col-md-4 w-xs-full">
+                        <SalesAreaChartWidget data={ salesData } />
                     </div>
                 </div>
             </div>
