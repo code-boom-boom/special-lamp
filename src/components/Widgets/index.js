@@ -29,9 +29,21 @@ const SalesAreaChartWidget = Loadable({
     loading: MyLoadingComponent
 });
 
+const SupportRequest = Loadable({
+    loader: () => import("./SupportRequest"),
+    loading: MyLoadingComponent
+});
+
+const RecentOrdersWidget = Loadable({
+    loader: () => import("./RecentOrders"),
+    loading: MyLoadingComponent
+});
+
 export {
     SessionSlider,
     VisitorAreaChartWidget,
     OrdersAreaChartWidget,
-    SalesAreaChartWidget
+    SalesAreaChartWidget,
+    SupportRequest,
+    RecentOrdersWidget
 }

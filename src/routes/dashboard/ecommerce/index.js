@@ -10,10 +10,15 @@ import IntlMessages from "Util/IntlMessages";
 // page title bar
 import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
 
+// rct collapsible card
+import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
+
 import {
     VisitorAreaChartWidget,
     OrdersAreaChartWidget,
-    SalesAreaChartWidget
+    SalesAreaChartWidget,
+    SupportRequest,
+    RecentOrdersWidget
 } from "Components/Widgets";
 
 // widgets data
@@ -48,6 +53,30 @@ export default class EcommerceDashboard extends Component {
                     <div className="col-sm-6 col-md-4 w-xs-full">
                         <SalesAreaChartWidget data={ salesData } />
                     </div>
+                </div>
+                <div className="row">
+                    <RctCollapsibleCard
+                        colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
+                        heading={ <IntlMessages id="widgets.supportRequest" /> }
+                        collapsible
+                        reloadable
+                        closeable
+                        fullBlock
+                        customClasses="overflow-hidden"
+                    >
+                        <SupportRequest />
+                    </RctCollapsibleCard>
+                    <RctCollapsibleCard
+                        colClasses="col-sm-12 col-md-8 col-lg-8 w-xs-full"
+                        heading={ <IntlMessages id="widgets.RecentOrders" /> }
+                        collapsible
+                        reloadable
+                        closeable
+                        fullBlock
+                        customClasses="overflow-hidden"
+                    >
+                        <RecentOrdersWidget />
+                    </RctCollapsibleCard>
                 </div>
             </div>
         );
